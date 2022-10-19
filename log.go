@@ -21,18 +21,19 @@ var instance Logger
 func Register(name string, adapter LoggerConfig) {
 	_, ok := adapters[name]
 	if ok {
-		panic(fmt.Errorf("适配器 [%s] 已装载，请勿重复加载", name))
+		panic(fmt.Errorf("adapter [%s] already register", name))
 	}
+	fmt.Printf("[Bootstrap-Log]  Register [%s] adapter", name)
 	adapters[name] = adapter
 }
 
 func InitLogger(name string) error {
 	adapter, ok := adapters[name]
 	if !ok {
-		return fmt.Errorf("找不到适配器 [%s]", name)
+		return fmt.Errorf("not found adapter [%s]", name)
 	}
 	if instance != nil {
-		fmt.Printf("日志适配已经存在，将使用 [%s] 替换 \n", name)
+		fmt.Printf("[Bootstrap-Log]  Instance will be replaced by [%s] \n", name)
 	}
 	if newInstance, err := adapter.Load(); err != nil {
 		return err
