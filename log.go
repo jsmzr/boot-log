@@ -23,7 +23,6 @@ func Register(name string, adapter LoggerConfig) {
 	if ok {
 		panic(fmt.Errorf("adapter [%s] already register", name))
 	}
-	fmt.Printf("[Bootstrap-Log]  Register [%s] adapter", name)
 	adapters[name] = adapter
 }
 
@@ -33,7 +32,7 @@ func InitLogger(name string) error {
 		return fmt.Errorf("not found adapter [%s]", name)
 	}
 	if instance != nil {
-		fmt.Printf("[Bootstrap-Log]  Instance will be replaced by [%s] \n", name)
+		fmt.Printf("Instance already init, will be [%s] replaced\n", name)
 	}
 	if newInstance, err := adapter.Load(); err != nil {
 		return err
