@@ -1,3 +1,3 @@
-module github.com/jsmzr/bootstrap-log
+module github.com/jsmzr/boot-log
 
 go 1.17
